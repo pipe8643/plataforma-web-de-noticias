@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Listado de noticias tecnológicas de TechPulse, generado desde un archivo JSON local.">
+  <meta name="theme-color" content="#10192e">
+  <title>TechPulse | Noticias</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="noticias">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>TechPulse</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="menu-principal" class="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+          <li><a href="noticias.html" data-nav="noticias">Noticias</a></li>
+          <li><a href="favoritos.html" data-nav="favoritos">Favoritos</a></li>
+          <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+          <li><a href="admin.html" data-nav="admin">Administración</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <noscript>
+      <p class="estado estado-error noscript">TechPulse necesita JavaScript para cargar las noticias, los favoritos y el formulario.</p>
+    </noscript>
+
+    <header class="page-intro">
+      <div class="container">
+        <p class="eyebrow">Catálogo</p>
+        <h1 id="titulo-pagina">Noticias</h1>
+        <p>Cada tarjeta sale de <code>data/noticias.json</code> y de los cambios locales de Administración. Elige una categoría o abre el detalle con Ver más.</p>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="titulo-pagina">
+      <div class="container">
+        <div id="filtros-categoria" class="filters" role="group" aria-label="Filtrar por categoría"></div>
+        <p id="resumen-listado" class="resumen-listado" aria-live="polite"></p>
+        <div id="listado-noticias" class="card-grid">
+          <p class="estado">Cargando noticias…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-brand">TechPulse</p>
+        <p>Plataforma académica para explorar noticias tecnológicas, guardar favoritas y practicar un front-end sin backend.</p>
+      </div>
+      <nav aria-label="Pie de página">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="noticias.html">Noticias</a></li>
+          <li><a href="favoritos.html">Favoritos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="admin.html">Administración</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>© <span id="anio">2026</span> TechPulse.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/favoritos.js" defer></script>
+  <script src="js/noticias.js" defer></script>
+</body>
+</html>

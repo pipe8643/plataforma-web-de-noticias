@@ -1,0 +1,120 @@
+/* TechPulse — adaptación a tablet y móvil.
+   Escritorio: el layout base de styles.css (tres columnas). */
+
+@media (max-width: 980px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-grid,
+  .contact-layout,
+  .admin-layout,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-item {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .admin-item .btn {
+    grid-column: 1 / -1;
+  }
+
+  .detalle-media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    right: 0;
+    padding: 0.45rem;
+    background: #0d1628;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .site-header.is-open .site-nav {
+    display: block;
+  }
+
+  .site-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .cta-inner,
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(var(--max), calc(100% - 1.4rem));
+  }
+
+  .hero {
+    padding-top: 2.4rem;
+  }
+
+  .hero h1,
+  .page-intro h1,
+  .detalle-cabecera h1 {
+    max-width: none;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions .btn,
+  .detalle-acciones .btn,
+  .hero-actions .btn,
+  .cta-inner .btn {
+    width: 100%;
+  }
+
+  .admin-item {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-item img {
+    width: 100%;
+    height: 140px;
+  }
+
+  .page-intro,
+  .section {
+    padding-top: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#44403c"/>
+    </linearGradient>
+    <pattern id="malla" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#fondo)"/>
+  <rect width="1200" height="675" fill="url(#malla)"/>
+  <circle cx="220" cy="560" r="160" fill="#ffffff" opacity="0.05"/>
+  <circle cx="1020" cy="110" r="190" fill="#fbbf24" opacity="0.22"/>
+  
+    <rect x="390" y="170" width="420" height="340" rx="28" fill="#292524" stroke="#fbbf24" stroke-width="8"/>
+    <rect x="450" y="230" width="300" height="220" rx="16" fill="#fbbf24"/>
+    <g stroke="#fbbf24" stroke-width="10">
+      <path d="M470 170 V110 M600 170 V110 M730 170 V110"/>
+      <path d="M470 510 V570 M600 510 V570 M730 510 V570"/>
+      <path d="M390 280 H330 M390 400 H330"/>
+      <path d="M810 280 H870 M810 400 H870"/>
+    </g>
+    <circle cx="600" cy="340" r="36" fill="#292524"/>
+  
+</svg>

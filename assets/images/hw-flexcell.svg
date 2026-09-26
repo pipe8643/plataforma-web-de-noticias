@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#042f2e"/>
+      <stop offset="100%" stop-color="#115e59"/>
+    </linearGradient>
+    <pattern id="malla" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#fondo)"/>
+  <rect width="1200" height="675" fill="url(#malla)"/>
+  <circle cx="220" cy="560" r="160" fill="#ffffff" opacity="0.05"/>
+  <circle cx="1020" cy="110" r="190" fill="#99f6e4" opacity="0.22"/>
+  
+    <path d="M260 430 C360 250 520 210 680 250 C860 296 980 220 1080 160" fill="none" stroke="#ffffff" stroke-width="28" stroke-linecap="round"/>
+    <rect x="470" y="300" width="280" height="140" rx="70" fill="#ffffff"/>
+    <rect x="510" y="345" width="70" height="50" rx="10" fill="#0f766e"/>
+    <rect x="595" y="345" width="70" height="50" rx="10" fill="#14b8a6"/>
+    <rect x="680" y="345" width="40" height="50" rx="10" fill="#99f6e4"/>
+  
+</svg>

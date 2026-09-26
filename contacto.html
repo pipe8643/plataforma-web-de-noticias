@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario de contacto de TechPulse con validación en el navegador.">
+  <meta name="theme-color" content="#10192e">
+  <title>TechPulse | Contacto</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="contacto">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>TechPulse</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="menu-principal" class="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+          <li><a href="noticias.html" data-nav="noticias">Noticias</a></li>
+          <li><a href="favoritos.html" data-nav="favoritos">Favoritos</a></li>
+          <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+          <li><a href="admin.html" data-nav="admin">Administración</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <noscript>
+      <p class="estado estado-error noscript">TechPulse necesita JavaScript para cargar las noticias, los favoritos y el formulario.</p>
+    </noscript>
+
+    <header class="page-intro">
+      <div class="container">
+        <p class="eyebrow">Redacción</p>
+        <h1>Contacto</h1>
+        <p>Escríbenos para proponer un tema. Todos los campos son obligatorios y el correo debe tener un formato válido.</p>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="titulo-formulario">
+      <div class="container contact-layout">
+        <div class="form-card">
+          <h2 id="titulo-formulario" class="block-title">Envíanos un mensaje</h2>
+          <div id="confirmacion-contacto" class="banner" role="status" tabindex="-1" hidden></div>
+          <form id="form-contacto" class="form" novalidate>
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" maxlength="80" aria-required="true" aria-describedby="error-nombre">
+              <p id="error-nombre" class="field-error"></p>
+            </div>
+            <div class="field">
+              <label for="correo">Correo electrónico</label>
+              <input id="correo" name="correo" type="email" autocomplete="email" maxlength="120" aria-required="true" aria-describedby="error-correo" placeholder="nombre@correo.com">
+              <p id="error-correo" class="field-error"></p>
+            </div>
+            <div class="field">
+              <label for="asunto">Asunto</label>
+              <input id="asunto" name="asunto" type="text" autocomplete="off" maxlength="120" aria-required="true" aria-describedby="error-asunto">
+              <p id="error-asunto" class="field-error"></p>
+            </div>
+            <div class="field">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" maxlength="2000" aria-required="true" aria-describedby="error-mensaje"></textarea>
+              <p id="error-mensaje" class="field-error"></p>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+          </form>
+        </div>
+        <aside class="note-card">
+          <h2>Qué ocurre al enviar</h2>
+          <p>Si falta un dato o el correo no es válido, verás el error junto al campo y el mensaje no se confirmará.</p>
+          <p>Si todo está correcto, el formulario se limpia y aparece una confirmación. En esta etapa no hay servidor: el mensaje no sale de tu navegador.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-brand">TechPulse</p>
+        <p>Plataforma académica para explorar noticias tecnológicas, guardar favoritas y practicar un front-end sin backend.</p>
+      </div>
+      <nav aria-label="Pie de página">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="noticias.html">Noticias</a></li>
+          <li><a href="favoritos.html">Favoritos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="admin.html">Administración</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>© <span id="anio">2026</span> TechPulse.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/contacto.js" defer></script>
+</body>
+</html>

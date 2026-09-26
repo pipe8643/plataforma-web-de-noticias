@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "titulo": "Aurora Lab enseña a un asistente a resumir papers sin perder la cita",
+    "descripcion": "Un laboratorio universitario prueba un asistente que condensa artículos técnicos y conserva la referencia de cada idea.",
+    "contenido": "Aurora Lab, un grupo de estudiantes y docentes de computación, presentó un asistente de lectura llamado Bruma. La herramienta toma un artículo académico y devuelve un resumen en lenguaje claro, con la cita al lado de cada afirmación.\n\nEl equipo insiste en un límite concreto: Bruma no inventa datos que no estén en el texto de origen. Si una frase no puede apoyarse en un párrafo, el resumen la marca como dudosa y pide revisión humana.\n\nEn la demostración, el asistente procesó un paper de visión por computador en menos de un minuto. El relato es ficticio y sirve para mostrar cómo una redacción tecnológica contaría un avance de inteligencia artificial.",
+    "imagen": "assets/images/ia-aurora.svg",
+    "categoria": "Inteligencia Artificial",
+    "fecha": "2026-09-18",
+    "destacada": true
+  },
+  {
+    "id": 2,
+    "titulo": "LumenShield marca sesiones raras en redes de campus antes de que escalen",
+    "descripcion": "Un prototipo de monitoreo avisa cuando un equipo del campus se comporta de forma distinta a su rutina habitual.",
+    "contenido": "El prototipo LumenShield observa patrones sencillos: horario, volumen de tráfico y servicios que suele usar cada equipo. Cuando una sesión se aleja de esa rutina, el panel pinta la alerta en ámbar y deja el detalle a la vista del equipo de soporte.\n\nNo bloquea la conexión por su cuenta. La decisión de aislar un equipo sigue en manos de una persona, para evitar cortes en laboratorios durante una entrega.\n\nLa prueba piloto cubre tres facultades y guarda un registro local de las alertas del día. El caso es inventado para la plataforma TechPulse.",
+    "imagen": "assets/images/ciber-lumen.svg",
+    "categoria": "Ciberseguridad",
+    "fecha": "2026-09-16",
+    "destacada": true
+  },
+  {
+    "id": 3,
+    "titulo": "El núcleo Quartz reparte el calor para que el portátil no baje de ritmo",
+    "descripcion": "Un chip experimental mueve la carga entre núcleos cuando la carcasa se calienta, pensado para equipos de estudio.",
+    "contenido": "Quartz es un diseño de procesador de laboratorio que mide la temperatura de la carcasa y reparte las tareas antes de que el ventilador tenga que subir al máximo. En la prueba interna, un portátil mantuvo una edición de video corta sin bajar la frecuencia de golpe.\n\nEl grupo no promete un producto de tienda. Mostró una placa de ensayo, un disipador sencillo y una gráfica de temperatura durante veinte minutos de trabajo.\n\nLa historia ilustra una línea de hardware: cuidar el calor sin hacer el equipo más grueso. Los datos del ensayo son demostrativos.",
+    "imagen": "assets/images/hw-quartz.svg",
+    "categoria": "Hardware",
+    "fecha": "2026-09-14",
+    "destacada": true
+  },
+  {
+    "id": 4,
+    "titulo": "Orbit IDE abre un modo colaborativo que vive solo en el navegador",
+    "descripcion": "El editor de código Orbit permite compartir una sesión de práctica sin crear una cuenta en la nube.",
+    "contenido": "Orbit IDE, usado en talleres de programación, activó un modo en el que dos personas editan el mismo archivo desde el navegador. La sesión viaja entre los dos equipos y se cierra cuando ambos abandonan la pestaña.\n\nNo hay historial en un servidor externo. Quien quiera conservar el resultado lo descarga al terminar, igual que cualquier archivo del curso.\n\nEl anuncio incluye atajos de teclado y un tema de alto contraste. Es un ejemplo ficticio de software pensado para clases.",
+    "imagen": "assets/images/sw-orbit.svg",
+    "categoria": "Software",
+    "fecha": "2026-09-11",
+    "destacada": false
+  },
+  {
+    "id": 5,
+    "titulo": "Semáforos de prueba ceden el cruce cuando detectan una sirena cercana",
+    "descripcion": "Una intersección piloto reconoce el patrón de una sirena y abre el paso antes de que la ambulancia llegue al cruce.",
+    "contenido": "En el barrio de ensayo, cuatro semáforos comparten un sensor que reconoce el sonido de una sirena registrada. Si la señal coincide y el vehículo se acerca, el cruce abre el paso y deja en rojo las calles laterales durante unos segundos.\n\nEl sistema no reemplaza al conductor ni a la central de tráfico. Solo adelanta una decisión que hoy se toma tarde, cuando la ambulancia ya está encima del semáforo.\n\nVecinos y estudiantes de ingeniería midieron los tiempos durante dos semanas. El relato es ficticio y se centra en innovación urbana.",
+    "imagen": "assets/images/inn-cruce.svg",
+    "categoria": "Innovación",
+    "fecha": "2026-09-09",
+    "destacada": false
+  },
+  {
+    "id": 6,
+    "titulo": "El formato Nota Viva deja actualizar un texto sin romper el enlace",
+    "descripcion": "Una redacción de prueba publica notas que pueden corregirse y muestran cuándo cambió cada párrafo.",
+    "contenido": "Nota Viva es un formato editorial de demostración. La dirección de la noticia no cambia, pero cada párrafo guarda la hora de su última edición. Quien lee puede ver qué se añadió después de la publicación.\n\nLa idea responde a un hábito de las redacciones: corregir un texto vivo sin obligar al lector a buscar otra página. En TechPulse el formato se cuenta como tendencia, no como un producto comercial.\n\nEl ejemplo incluye una etiqueta de actualización y un archivo de cambios. El caso es inventado para el catálogo.",
+    "imagen": "assets/images/td-nota.svg",
+    "categoria": "Tendencias digitales",
+    "fecha": "2026-09-07",
+    "destacada": false
+  },
+  {
+    "id": 7,
+    "titulo": "NubeCero clasifica documentos en el propio equipo, sin enviarlos fuera",
+    "descripcion": "Un modelo pequeño ordena apuntes y actas dentro del computador del estudiante, sin subir los archivos.",
+    "contenido": "NubeCero cabe en un equipo de gama media y clasifica carpetas de apuntes por tema. El entrenamiento de muestra se hizo con textos públicos de la biblioteca, y la clasificación diaria ocurre sin conexión.\n\nEl grupo publicó los límites con claridad: el modelo confunde documentos muy parecidos y no debe usarse para calificar trabajos. Sirve para ordenar, no para decidir.\n\nLa noticia ficticia muestra una vía de inteligencia artificial local, distinta de los asistentes que envían cada frase a un servidor.",
+    "imagen": "assets/images/ia-nubecero.svg",
+    "categoria": "Inteligencia Artificial",
+    "fecha": "2026-09-04",
+    "destacada": false
+  },
+  {
+    "id": 8,
+    "titulo": "Una guía abierta muestra cómo rotar claves de API en proyectos de clase",
+    "descripcion": "Estudiantes publican un paso a paso para cambiar claves de prueba y evitar dejarlas dentro del código.",
+    "contenido": "La guía, escrita por un semillero de seguridad, explica tres hábitos: crear una clave distinta por proyecto, guardarla fuera del repositorio y reemplazarla cuando el curso termina. Incluye un ejemplo con un archivo de entorno que no se sube a GitHub.\n\nNo enseña a vulnerar sistemas. Enseña a cerrar la puerta que queda abierta cuando una clave de prueba se copia en un trabajo público.\n\nTechPulse resume esa guía como pieza de ciberseguridad para quien empieza a programar. El material es ficticio.",
+    "imagen": "assets/images/ciber-claves.svg",
+    "categoria": "Ciberseguridad",
+    "fecha": "2026-09-02",
+    "destacada": false
+  },
+  {
+    "id": 9,
+    "titulo": "FlexCell prueba una batería flexible para relojes que miden el pulso",
+    "descripcion": "Una lámina experimental se dobla con la correa y busca más ciclos de carga en wearables de laboratorio.",
+    "contenido": "FlexCell es una lámina fina que el equipo dobló más de mil veces junto a una correa de reloj. En el banco de prueba mantuvo carga suficiente para un día de medición de pulso, con un margen menor al de una pila rígida convencional.\n\nEl prototipo todavía se calienta si se carga demasiado rápido. Por eso la demostración usa una corriente baja y un estuche abierto, lejos de un producto final.\n\nLa pieza sirve para hablar de hardware vestible con datos de ensayo claramente demostrativos.",
+    "imagen": "assets/images/hw-flexcell.svg",
+    "categoria": "Hardware",
+    "fecha": "2026-08-28",
+    "destacada": false
+  },
+  {
+    "id": 10,
+    "titulo": "Mosaico ayuda a armar tableros de datos que también se leen con teclado",
+    "descripcion": "La librería Mosaico construye paneles con foco visible, etiquetas y un orden de lectura predecible.",
+    "contenido": "Mosaico es una librería ficticia de interfaz para paneles de datos. Cada gráfico lleva un título, un resumen numérico y se alcanza con el tabulador. El color no es el único modo de distinguir una serie: también hay trama y etiqueta.\n\nEn el taller de prueba, un grupo armó un tablero de asistencia en una tarde y lo revisó con un lector de pantalla de demostración. Los errores más comunes quedaron anotados en la documentación.\n\nLa noticia conecta software y accesibilidad, dos ejes que esta plataforma también cuida en su propia interfaz.",
+    "imagen": "assets/images/sw-mosaico.svg",
+    "categoria": "Software",
+    "fecha": "2026-08-25",
+    "destacada": false
+  },
+  {
+    "id": 11,
+    "titulo": "Un taller vecinal imprime piezas modulares para prótesis de bajo costo",
+    "descripcion": "Un laboratorio comunitario ensaya encajes impresos que se pueden reemplazar por partes, sin rehacer la pieza completa.",
+    "contenido": "El taller Puente imprime encajes modulares para prótesis de antebrazo. Si se desgasta una junta, se cambia esa pieza y el resto sigue en uso. El diseño se publicó con medidas abiertas para que otro laboratorio pueda repetir la prueba.\n\nUn fisioterapeuta del barrio acompaña las sesiones y anota presión, ajuste y comodidad. El grupo recuerda que el ensayo no sustituye un servicio clínico.\n\nEs una historia de innovación social inventada para el catálogo de TechPulse.",
+    "imagen": "assets/images/inn-puente.svg",
+    "categoria": "Innovación",
+    "fecha": "2026-08-21",
+    "destacada": false
+  },
+  {
+    "id": 12,
+    "titulo": "Pizarras de aula guardan el trazo del día para quien no pudo asistir",
+    "descripcion": "Una pizarra de demostración exporta la clase a un archivo ligero para recorrerla después en el navegador.",
+    "contenido": "En dos aulas piloto, la pizarra digital guarda el trazo junto con la hora y el nombre de la actividad. Al terminar, el docente exporta un archivo que el curso abre en el navegador, sin instalar otra aplicación.\n\nQuien faltó puede avanzar por las escenas de la clase. No es una grabación de video: es el dibujo y las notas, con un peso mucho menor.\n\nLa tendencia ilustra cómo el material de clase se vuelve un archivo reutilizable. El caso es ficticio y cierra el catálogo inicial de TechPulse.",
+    "imagen": "assets/images/td-pizarra.svg",
+    "categoria": "Tendencias digitales",
+    "fecha": "2026-08-18",
+    "destacada": false
+  }
+]

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3f0d1e"/>
+      <stop offset="100%" stop-color="#9f1239"/>
+    </linearGradient>
+    <pattern id="malla" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#fondo)"/>
+  <rect width="1200" height="675" fill="url(#malla)"/>
+  <circle cx="220" cy="560" r="160" fill="#ffffff" opacity="0.05"/>
+  <circle cx="1020" cy="110" r="190" fill="#fda4af" opacity="0.22"/>
+  
+    <path d="M600 110 L860 210 V390 C860 510 740 580 600 620 C460 580 340 510 340 390 V210 Z" fill="rgba(255,255,255,0.1)" stroke="#ffffff" stroke-width="8"/>
+    <path d="M600 190 L760 250 V380 C760 460 690 510 600 540 C510 510 440 460 440 380 V250 Z" fill="#ffffff" opacity="0.92"/>
+    <path d="M530 390 L580 440 L690 320" fill="none" stroke="#9f1239" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</svg>

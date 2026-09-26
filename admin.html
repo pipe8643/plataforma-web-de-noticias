@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Administración local de noticias de TechPulse: crear y eliminar en el navegador.">
+  <meta name="theme-color" content="#10192e">
+  <title>TechPulse | Administración</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="admin">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>TechPulse</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="menu-principal" class="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+          <li><a href="noticias.html" data-nav="noticias">Noticias</a></li>
+          <li><a href="favoritos.html" data-nav="favoritos">Favoritos</a></li>
+          <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+          <li><a href="admin.html" data-nav="admin">Administración</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <noscript>
+      <p class="estado estado-error noscript">TechPulse necesita JavaScript para cargar las noticias, los favoritos y el formulario.</p>
+    </noscript>
+
+    <header class="page-intro">
+      <div class="container">
+        <p class="eyebrow">Mini CRUD</p>
+        <h1>Administración</h1>
+        <p>Puedes ver el catálogo, crear una noticia y eliminar otra. Los cambios se guardan en este navegador. El archivo <code>data/noticias.json</code> no se modifica, porque esta etapa no tiene backend.</p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container admin-layout">
+        <div class="form-card">
+          <h2 class="block-title">Nueva noticia</h2>
+          <div id="aviso-admin" class="banner" role="status" tabindex="-1" hidden></div>
+          <form id="form-noticia" class="form" novalidate>
+            <div class="field">
+              <label for="titulo">Título</label>
+              <input id="titulo" name="titulo" type="text" maxlength="140" aria-required="true" aria-describedby="error-titulo">
+              <p id="error-titulo" class="field-error"></p>
+            </div>
+            <div class="field">
+              <label for="descripcion">Descripción breve</label>
+              <textarea id="descripcion" class="is-short" name="descripcion" maxlength="280" aria-required="true" aria-describedby="error-descripcion"></textarea>
+              <p id="error-descripcion" class="field-error"></p>
+            </div>
+            <div class="field">
+              <label for="contenido-noticia">Contenido</label>
+              <textarea id="contenido-noticia" name="contenido" maxlength="4000" aria-required="true" aria-describedby="ayuda-contenido error-contenido"></textarea>
+              <p id="ayuda-contenido" class="field-help">Separa los párrafos con una línea en blanco.</p>
+              <p id="error-contenido" class="field-error"></p>
+            </div>
+            <div class="field">
+              <label for="categoria">Categoría</label>
+              <select id="categoria" name="categoria" aria-required="true" aria-describedby="error-categoria">
+                <option value="">Elige una categoría</option>
+                <option>Inteligencia Artificial</option>
+                <option>Ciberseguridad</option>
+                <option>Hardware</option>
+                <option>Software</option>
+                <option>Innovación</option>
+                <option>Tendencias digitales</option>
+              </select>
+              <p id="error-categoria" class="field-error"></p>
+            </div>
+            <div class="field">
+              <label for="imagen">Ilustración</label>
+              <select id="imagen" name="imagen">
+                <option value="assets/images/ia-aurora.svg">Nodos Aurora</option>
+                <option value="assets/images/ia-nubecero.svg">Equipo local</option>
+                <option value="assets/images/ciber-lumen.svg">Escudo Lumen</option>
+                <option value="assets/images/ciber-claves.svg">Rotación de claves</option>
+                <option value="assets/images/hw-quartz.svg">Chip Quartz</option>
+                <option value="assets/images/hw-flexcell.svg">Batería flexible</option>
+                <option value="assets/images/sw-orbit.svg">Editor en el navegador</option>
+                <option value="assets/images/sw-mosaico.svg">Tablero Mosaico</option>
+                <option value="assets/images/inn-cruce.svg">Cruce urbano</option>
+                <option value="assets/images/inn-puente.svg">Piezas modulares</option>
+                <option value="assets/images/td-nota.svg">Nota viva</option>
+                <option value="assets/images/td-pizarra.svg">Pizarra de aula</option>
+              </select>
+              <div class="preview">
+                <img id="preview-imagen" src="assets/images/ia-aurora.svg" alt="Vista previa de la ilustración seleccionada" width="1200" height="675">
+              </div>
+            </div>
+            <label class="check" for="destacada">
+              <input id="destacada" name="destacada" type="checkbox">
+              Mostrar en noticias destacadas del inicio
+            </label>
+            <div class="admin-actions">
+              <button class="btn btn-primary" type="submit">Crear noticia</button>
+              <button class="btn btn-secondary" id="restablecer-catalogo" type="button">Restablecer catálogo</button>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <h2 class="block-title">Noticias disponibles</h2>
+          <p id="conteo-admin" class="resumen-listado" aria-live="polite">Cargando catálogo…</p>
+          <div id="admin-listado" class="admin-list">
+            <p class="estado">Cargando noticias…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-brand">TechPulse</p>
+        <p>Plataforma académica para explorar noticias tecnológicas, guardar favoritas y practicar un front-end sin backend.</p>
+      </div>
+      <nav aria-label="Pie de página">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="noticias.html">Noticias</a></li>
+          <li><a href="favoritos.html">Favoritos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="admin.html">Administración</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>© <span id="anio">2026</span> TechPulse.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/crud.js" defer></script>
+</body>
+</html>

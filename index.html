@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="TechPulse es una plataforma académica de noticias tecnológicas: listado, detalle, favoritos y contacto.">
-  <meta name="theme-color" content="#10192e">
+  <meta name="theme-color" content="#0c2344">
   <title>TechPulse | Inicio</title>
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -18,7 +18,9 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html">
-        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-14h-7V2z"/></svg>
+        </span>
         <span>TechPulse</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
@@ -28,6 +30,13 @@
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
       <nav id="menu-principal" class="site-nav" aria-label="Principal">
+        <form class="header-search header-search-mobile" action="noticias.html" method="get" role="search">
+          <label class="sr-only" for="buscar-menu">Buscar noticias</label>
+          <input id="buscar-menu" name="q" type="search" placeholder="Buscar noticias..." autocomplete="off">
+          <button type="submit" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20 16.5 16.5"/></svg>
+          </button>
+        </form>
         <ul>
           <li><a href="index.html" data-nav="inicio">Inicio</a></li>
           <li><a href="noticias.html" data-nav="noticias">Noticias</a></li>
@@ -36,6 +45,16 @@
           <li><a href="admin.html" data-nav="admin">Administración</a></li>
         </ul>
       </nav>
+      <form class="header-search" action="noticias.html" method="get" role="search">
+        <label class="sr-only" for="buscar">Buscar noticias</label>
+        <input id="buscar" name="q" type="search" placeholder="Buscar noticias..." autocomplete="off">
+        <button type="submit" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20 16.5 16.5"/></svg>
+        </button>
+      </form>
+      <a class="header-user" href="favoritos.html" aria-label="Favoritos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5 19.2c1.4-3 3.8-4.5 7-4.5s5.6 1.5 7 4.5"/></svg>
+      </a>
     </div>
   </header>
 
@@ -44,49 +63,105 @@
       <p class="estado estado-error noscript">TechPulse necesita JavaScript para cargar las noticias, los favoritos y el formulario.</p>
     </noscript>
 
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">Noticias tecnológicas</p>
-          <h1>La señal clara de lo que está cambiando</h1>
-          <p class="lede">TechPulse reúne relatos ficticios de inteligencia artificial, ciberseguridad, hardware, software e innovación para practicar una interfaz real de lectura.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="noticias.html">Explorar noticias</a>
-            <a class="btn btn-secondary" href="favoritos.html">Ver favoritos</a>
-          </div>
+    <section class="hero-wrap" aria-roledescription="carrusel" aria-label="Noticia principal">
+      <div class="container">
+        <div id="hero-slider">
+          <p class="estado">Cargando portada…</p>
         </div>
-        <aside class="hero-panel" aria-label="Resumen del catálogo">
-          <p class="eyebrow">Catálogo de demostración</p>
-          <p class="hero-stat"><span id="hero-total">—</span> <span class="hero-stat-label">noticias en este navegador</span></p>
-          <a href="noticias.html">Ver el listado</a>
-        </aside>
       </div>
     </section>
 
     <section class="section" aria-labelledby="titulo-destacadas">
       <div class="container">
         <div class="section-head">
-          <div>
-            <p class="eyebrow">Selección</p>
-            <h2 id="titulo-destacadas">Noticias destacadas</h2>
-          </div>
-          <a class="btn btn-secondary" href="noticias.html">Ver todas</a>
+          <h2 id="titulo-destacadas">
+            <span class="section-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 2 2.4 6.8H22l-6 4.4 2.3 6.8L12 16.8 5.7 20l2.3-6.8-6-4.4h7.6z"/></svg></span>
+            Noticias destacadas
+          </h2>
+          <a class="link-all" href="noticias.html">Ver todas →</a>
         </div>
-        <!-- Las cards no están en el HTML: noticias.js las crea desde data/noticias.json. -->
         <div id="destacadas" class="card-grid">
           <p class="estado">Cargando noticias destacadas…</p>
         </div>
       </div>
     </section>
 
-    <section class="cta-band" aria-labelledby="titulo-contacto">
+    <section class="section" aria-labelledby="titulo-categorias">
       <div class="container">
-        <div class="cta-inner">
+        <div class="section-head">
+          <h2 id="titulo-categorias">
+            <span class="section-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z"/></svg></span>
+            Explora por categorías
+          </h2>
+        </div>
+        <div class="cat-grid">
+          <a class="cat-tile" href="noticias.html?categoria=Inteligencia%20Artificial">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span>
+            <strong>Inteligencia Artificial</strong>
+            <span>El futuro ya está aquí</span>
+          </a>
+          <a class="cat-tile" href="noticias.html?categoria=Hardware">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+            <strong>Hardware</strong>
+            <span>Dispositivos y gadgets</span>
+          </a>
+          <a class="cat-tile" href="noticias.html?categoria=Software">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13 7l-2 10"/></svg></span>
+            <strong>Software</strong>
+            <span>Aplicaciones y sistemas</span>
+          </a>
+          <a class="cat-tile" href="noticias.html?categoria=Ciberseguridad">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.2 2.8 7.4 7 9 4.2-1.6 7-4.8 7-9V6l-7-3z"/></svg></span>
+            <strong>Ciberseguridad</strong>
+            <span>Protege tu información</span>
+          </a>
+          <a class="cat-tile" href="noticias.html?categoria=Innovaci%C3%B3n">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3 11c.6.5 1 1.2 1 2h4c0-.8.4-1.5 1-2a6 6 0 0 0-3-11z"/></svg></span>
+            <strong>Innovación</strong>
+            <span>Ideas que cambian el mundo</span>
+          </a>
+          <a class="cat-tile" href="noticias.html?categoria=Tendencias%20digitales">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16l5-5 3 3 8-8"/><path d="M14 6h6v6"/></svg></span>
+            <strong>Tendencias digitales</strong>
+            <span>Lo que viene</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="titulo-ultimas">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="titulo-ultimas">
+            <span class="section-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v3H4zm0 5.5h10v3H4zM4 16h16v3H4z"/></svg></span>
+            Últimas noticias
+          </h2>
+          <a class="link-all" href="noticias.html">Ver todas →</a>
+        </div>
+        <div id="ultimas" class="latest-grid">
+          <p class="estado">Cargando últimas noticias…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="boletin-wrap" aria-labelledby="titulo-boletin">
+      <div class="container">
+        <div class="boletin">
           <div>
-            <h2 id="titulo-contacto">¿Quieres proponernos un tema?</h2>
-            <p>Cuéntanos qué tecnología te gustaría ver en el catálogo. El formulario comprueba los datos y confirma el resultado en la misma página.</p>
+            <h2 id="titulo-boletin">Suscríbete a nuestro boletín</h2>
+            <p>Recibe las últimas noticias y novedades tecnológicas en tu correo.</p>
           </div>
-          <a class="btn btn-light" href="contacto.html">Ir a contacto</a>
+          <div class="boletin-panel">
+            <p id="aviso-boletin" class="banner" hidden tabindex="-1"></p>
+            <form id="form-boletin" class="boletin-form" novalidate>
+              <div class="field">
+                <label class="sr-only" for="correo-boletin">Correo electrónico</label>
+                <input id="correo-boletin" name="correo" type="email" placeholder="Tu correo electrónico..." autocomplete="email" required>
+                <p class="field-error" aria-live="polite"></p>
+              </div>
+              <button class="btn btn-primary" type="submit">Suscribirse</button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -94,11 +169,18 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div>
-        <p class="footer-brand">TechPulse</p>
-        <p>Plataforma académica para explorar noticias tecnológicas, guardar favoritas y practicar un front-end sin backend.</p>
+      <div class="footer-brand-block">
+        <a class="logo" href="index.html">
+          <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-14h-7V2z"/></svg>
+          </span>
+          <span>TechPulse</span>
+        </a>
+        <p>Tu fuente confiable de noticias tecnológicas, innovación y tendencias digitales.</p>
+        <div class="social" aria-hidden="true"><span>f</span><span>X</span><span>in</span><span>▶</span></div>
       </div>
-      <nav aria-label="Pie de página">
+      <nav aria-label="Enlaces rápidos">
+        <h2>Enlaces rápidos</h2>
         <ul>
           <li><a href="index.html">Inicio</a></li>
           <li><a href="noticias.html">Noticias</a></li>
@@ -107,6 +189,25 @@
           <li><a href="admin.html">Administración</a></li>
         </ul>
       </nav>
+      <nav aria-label="Categorías">
+        <h2>Categorías</h2>
+        <ul>
+          <li><a href="noticias.html?categoria=Inteligencia%20Artificial">Inteligencia Artificial</a></li>
+          <li><a href="noticias.html?categoria=Hardware">Hardware</a></li>
+          <li><a href="noticias.html?categoria=Ciberseguridad">Ciberseguridad</a></li>
+          <li><a href="noticias.html?categoria=Software">Software</a></li>
+          <li><a href="noticias.html?categoria=Innovaci%C3%B3n">Innovación</a></li>
+          <li><a href="noticias.html?categoria=Tendencias%20digitales">Tendencias digitales</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Contacto</h2>
+        <ul>
+          <li>Bogotá, Colombia</li>
+          <li><a href="mailto:contacto@techpulse.com">contacto@techpulse.com</a></li>
+          <li><a href="tel:+573001234567">+57 300 123 4567</a></li>
+        </ul>
+      </div>
     </div>
     <div class="container footer-copy">
       <p>© <span id="anio">2026</span> TechPulse.</p>

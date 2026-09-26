@@ -57,14 +57,13 @@
       .replace(/'/g, '&#39;');
   }
 
-  function formatearFecha(iso) {
+  function formatearFecha(iso, estilo = 'long') {
     const fecha = new Date(`${iso}T00:00:00`);
     if (Number.isNaN(fecha.getTime())) return String(iso || '');
-    return new Intl.DateTimeFormat('es-ES', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    }).format(fecha);
+    const opciones = estilo === 'short'
+      ? { day: '2-digit', month: 'short', year: 'numeric' }
+      : { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Intl.DateTimeFormat('es-ES', opciones).format(fecha);
   }
 
   function slugCategoria(nombre) {
@@ -208,14 +207,14 @@
         <div class="card-media">
           <img src="${imagen}" alt="${escaparHtml(`Ilustración de la noticia: ${noticia.titulo}`)}" width="1200" height="675" loading="lazy" decoding="async" data-fallback="${respaldo}">
           <span class="badge badge-${slugCategoria(noticia.categoria)}">${escaparHtml(noticia.categoria)}</span>
+          ${botonFavorito(id)}
         </div>
         <div class="card-body">
-          <p class="meta"><time datetime="${escaparHtml(noticia.fecha)}">${escaparHtml(formatearFecha(noticia.fecha))}</time></p>
           <${etiqueta} class="card-title"><a href="detalle.html?id=${id}">${titulo}</a></${etiqueta}>
           <p class="card-text">${escaparHtml(noticia.descripcion)}</p>
-          <div class="card-actions">
-            <a class="btn btn-primary" href="detalle.html?id=${id}">Ver más</a>
-            ${botonFavorito(id)}
+          <div class="card-foot">
+            <p class="meta"><time datetime="${escaparHtml(noticia.fecha)}">${escaparHtml(formatearFecha(noticia.fecha, 'short'))}</time></p>
+            <a class="btn btn-primary btn-ver" href="detalle.html?id=${id}">Ver más <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>`;
@@ -270,6 +269,39 @@
     }, true);
   }
 
+  function iniciarBusqueda() {
+    const consulta = new URLSearchParams(window.location.search).get('q');
+    if (!consulta) return;
+    document.querySelectorAll('input[name="q"]').forEach((campo) => {
+      campo.value = consulta;
+    });
+  }
+
+  function iniciarBoletin() {
+    const formulario = document.getElementById('form-boletin');
+    if (!formulario) return;
+    const correo = formulario.querySelector('#correo-boletin');
+    const aviso = document.getElementById('aviso-boletin');
+    formulario.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      const valor = correo.value.trim();
+      const valido = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor);
+      if (!valido) {
+        mostrarErrorCampo(correo, 'Ingresa un correo electrónico válido.');
+        if (aviso) aviso.hidden = true;
+        correo.focus();
+        return;
+      }
+      mostrarErrorCampo(correo, '');
+      formulario.reset();
+      if (aviso) {
+        aviso.hidden = false;
+        aviso.textContent = 'Suscripción lista en esta demostración. El correo no sale del navegador porque no hay servidor.';
+        aviso.focus();
+      }
+    });
+  }
+
   function iniciarNavegacion() {
     const anio = document.getElementById('anio');
     if (anio) anio.textContent = String(new Date().getFullYear());
@@ -312,12 +344,16 @@
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 860) cerrarMenu();
+      if (window.innerWidth > 980) cerrarMenu();
     });
   }
 
   prepararImagenes();
-  document.addEventListener('DOMContentLoaded', iniciarNavegacion);
+    document.addEventListener('DOMContentLoaded', () => {
+      iniciarNavegacion();
+      iniciarBusqueda();
+      iniciarBoletin();
+    });
 
   window.TechPulse = {
     CLAVES,

@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Administración local de noticias de TechPulse: crear y eliminar en el navegador.">
-  <meta name="theme-color" content="#10192e">
+  <meta name="theme-color" content="#0c2344">
   <title>TechPulse | Administración</title>
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -18,7 +18,9 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html">
-        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-14h-7V2z"/></svg>
+        </span>
         <span>TechPulse</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
@@ -28,6 +30,13 @@
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
       <nav id="menu-principal" class="site-nav" aria-label="Principal">
+        <form class="header-search header-search-mobile" action="noticias.html" method="get" role="search">
+          <label class="sr-only" for="buscar-menu">Buscar noticias</label>
+          <input id="buscar-menu" name="q" type="search" placeholder="Buscar noticias..." autocomplete="off">
+          <button type="submit" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20 16.5 16.5"/></svg>
+          </button>
+        </form>
         <ul>
           <li><a href="index.html" data-nav="inicio">Inicio</a></li>
           <li><a href="noticias.html" data-nav="noticias">Noticias</a></li>
@@ -36,6 +45,16 @@
           <li><a href="admin.html" data-nav="admin">Administración</a></li>
         </ul>
       </nav>
+      <form class="header-search" action="noticias.html" method="get" role="search">
+        <label class="sr-only" for="buscar">Buscar noticias</label>
+        <input id="buscar" name="q" type="search" placeholder="Buscar noticias..." autocomplete="off">
+        <button type="submit" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20 16.5 16.5"/></svg>
+        </button>
+      </form>
+      <a class="header-user" href="favoritos.html" aria-label="Favoritos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5 19.2c1.4-3 3.8-4.5 7-4.5s5.6 1.5 7 4.5"/></svg>
+      </a>
     </div>
   </header>
 
@@ -131,11 +150,18 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div>
-        <p class="footer-brand">TechPulse</p>
-        <p>Plataforma académica para explorar noticias tecnológicas, guardar favoritas y practicar un front-end sin backend.</p>
+      <div class="footer-brand-block">
+        <a class="logo" href="index.html">
+          <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-14h-7V2z"/></svg>
+          </span>
+          <span>TechPulse</span>
+        </a>
+        <p>Tu fuente confiable de noticias tecnológicas, innovación y tendencias digitales.</p>
+        <div class="social" aria-hidden="true"><span>f</span><span>X</span><span>in</span><span>▶</span></div>
       </div>
-      <nav aria-label="Pie de página">
+      <nav aria-label="Enlaces rápidos">
+        <h2>Enlaces rápidos</h2>
         <ul>
           <li><a href="index.html">Inicio</a></li>
           <li><a href="noticias.html">Noticias</a></li>
@@ -144,6 +170,25 @@
           <li><a href="admin.html">Administración</a></li>
         </ul>
       </nav>
+      <nav aria-label="Categorías">
+        <h2>Categorías</h2>
+        <ul>
+          <li><a href="noticias.html?categoria=Inteligencia%20Artificial">Inteligencia Artificial</a></li>
+          <li><a href="noticias.html?categoria=Hardware">Hardware</a></li>
+          <li><a href="noticias.html?categoria=Ciberseguridad">Ciberseguridad</a></li>
+          <li><a href="noticias.html?categoria=Software">Software</a></li>
+          <li><a href="noticias.html?categoria=Innovaci%C3%B3n">Innovación</a></li>
+          <li><a href="noticias.html?categoria=Tendencias%20digitales">Tendencias digitales</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Contacto</h2>
+        <ul>
+          <li>Bogotá, Colombia</li>
+          <li><a href="mailto:contacto@techpulse.com">contacto@techpulse.com</a></li>
+          <li><a href="tel:+573001234567">+57 300 123 4567</a></li>
+        </ul>
+      </div>
     </div>
     <div class="container footer-copy">
       <p>© <span id="anio">2026</span> TechPulse.</p>

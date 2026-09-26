@@ -21,7 +21,7 @@ Construir una interfaz multipágina, responsive y fácil de explicar en una sust
 - JavaScript moderno (ES6+)
 - JSON local (`data/noticias.json`)
 - `localStorage`
-- Sin backend y sin Angular
+
 
 ## Estructura
 
@@ -91,49 +91,3 @@ El archivo JSON es la semilla del catálogo y no se reescribe. El navegador guar
 Los favoritos guardan solo el id. Al mostrarlos, la página vuelve a buscar la noticia en el catálogo. Si el id ya no existe, se elimina de la lista.
 
 El formulario de contacto no se guarda: solo se valida y se confirma en pantalla.
-
-## Limitaciones del CRUD sin backend
-
-La pantalla de administración no es una base de datos.
-
-- Crear y eliminar solo afecta al navegador actual.
-- Otro computador, otro navegador o una ventana de incógnito no ven esos cambios.
-- `data/noticias.json` permanece igual en el repositorio.
-- Borrar los datos del sitio, o pulsar **Restablecer catálogo**, devuelve la semilla del JSON y quita las noticias creadas aquí.
-- No hay usuarios, sesiones ni sincronización entre personas.
-- No se puede editar una noticia ya publicada; el alcance de esta entrega es crear y eliminar.
-
-## Guion breve para la sustentación
-
-1. Abrir el inicio y mostrar las destacadas, que salen del JSON.
-2. Entrar a Noticias, filtrar una categoría y pulsar **Ver más**.
-3. En el detalle, guardar la noticia y comprobar que el botón cambia a **En favoritos**.
-4. Abrir Favoritos, quitar la noticia y mostrar el mensaje de lista vacía.
-5. En Contacto, enviar vacío, luego un correo inválido y por último un formulario correcto.
-6. En Administración, crear una noticia, verla en el listado y eliminarla. Explicar que el JSON no cambió.
-
-## Publicar en GitHub
-
-1. Crea un repositorio vacío en GitHub, por ejemplo `plataforma-noticias`.
-2. En la carpeta del proyecto:
-
-```bash
-git init
-git add .
-git commit -m "Publicar la primera versión de TechPulse"
-git branch -M main
-git remote add origin https://github.com/USUARIO/plataforma-noticias.git
-git push -u origin main
-```
-
-Sustituye `USUARIO` por tu cuenta.
-
-Para publicarlo como sitio estático: en el repositorio, entra a **Settings > Pages**, elige la rama `main` y la carpeta raíz. Las rutas de este proyecto son relativas, así que funcionan tanto en `http://localhost` como en GitHub Pages.
-
-## Autor
-
-Nombre del estudiante: _completar_
-
-Módulo: Desarrollo de Front-end
-
-Entregas cubiertas: 1 y 2

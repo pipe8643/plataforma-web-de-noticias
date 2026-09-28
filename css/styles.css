@@ -1,4 +1,12 @@
-/* TechPulse — interfaz alineada con los mockups de portada. */
+/*
+  styles.css — aspecto de NewsWave.
+  El HTML pone la estructura y este archivo pone colores, espacios y columnas.
+  Las medidas que cambian en móvil viven en responsive.css, no aquí.
+
+  :root guarda las variables (colores, radio, ancho máximo).
+  El resto del archivo sigue el orden de la página: base, cabecera, portada,
+  tarjetas, categorías, boletín, pie, listado, botones, detalle, formularios y admin.
+*/
 
 :root {
   --navy: #0c2344;
@@ -21,6 +29,7 @@
   --font: "Inter", "Segoe UI", sans-serif;
 }
 
+/* box-sizing en todos los elementos: el padding cuenta dentro del ancho, no se suma por fuera. */
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -56,6 +65,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   outline-offset: 3px;
 }
 
+/* Texto solo para lectores de pantalla. Visualmente no ocupa espacio. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -87,6 +97,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   margin-inline: auto;
 }
 
+/* Cabecera fija visualmente al estilo de la portada: logo, menú, buscador. */
 .site-header {
   position: sticky;
   top: 0;
@@ -209,6 +220,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 }
 .nav-toggle-bar { width: 1.05rem; height: 2px; background: #fff; border-radius: 2px; }
 
+/* Carrusel de portada. Solo se ve la diapositiva con la clase is-active. */
 .hero-wrap { padding: 1.35rem 0 0.4rem; }
 .hero-viewport {
   position: relative;
@@ -303,6 +315,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 }
 .link-all:hover { text-decoration: underline; }
 
+/* Rejilla de noticias. En escritorio son 3 columnas; responsive.css la baja a 2 y luego a 1. */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -391,6 +404,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 }
 .card .btn-favorito.is-active { color: #e11d48; background: #fff; }
 
+/* Seis accesos de categoría en la portada. */
 .cat-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -425,6 +439,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 }
 .cat-icon svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.8; }
 
+/* Franja del boletín, encima del pie. */
 .boletin-wrap { padding: 1.5rem 0 2rem; }
 .boletin {
   display: flex;
@@ -463,6 +478,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .boletin .field { flex: 1; }
 .boletin .field-error { color: #fecdd3; }
 
+/* Pie de página. El logo reutiliza las mismas clases de la cabecera. */
 .site-footer {
   background: var(--navy-deep);
   color: rgba(255, 255, 255, 0.78);
@@ -505,6 +521,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .eyebrow { color: var(--blue); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 .eyebrow a { color: inherit; text-decoration: none; }
 
+/* Botones de filtro del listado. is-active es la categoría elegida. */
 .filters { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.8rem; }
 .chip {
   min-height: 2.2rem;
@@ -531,6 +548,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .empty-state p { color: var(--muted); margin-bottom: 0.9rem; }
 .estado .btn { margin-top: 0.8rem; }
 
+/* Botones. btn-primary es el azul; secondary y ghost son el contorno claro; danger es eliminar. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -555,6 +573,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .icono { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 2; }
 .btn-favorito.is-active .icono { fill: currentColor; }
 
+/* Artículo de detalle.html. El texto largo se limita a unos 70 caracteres por línea. */
 .detalle-articulo {
   background: #fff;
   border: 1px solid var(--line);
@@ -573,6 +592,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .detalle-contenido p + p { margin-top: 0.9rem; }
 .detalle-contenido p { font-size: 1.05rem; line-height: 1.7; }
 
+/* Contacto y administración: formulario a un lado y una columna de apoyo al otro. */
 .contact-layout, .admin-layout {
   display: grid;
   gap: 1.2rem;

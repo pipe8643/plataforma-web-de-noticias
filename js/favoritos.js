@@ -1,19 +1,27 @@
 /**
- * Favoritos.
- * Se guarda solo el id, dentro de un conjunto, para no duplicar noticias.
- * La página de favoritos vuelve a leer el catálogo y descarta ids que ya no existen.
+ * favoritos.js — guardar y quitar noticias.
+ *
+ * En localStorage solo se guarda el id, dentro de un conjunto, para no repetir la misma noticia.
+ * Al pintar la página de favoritos se vuelve a leer el catálogo y se descartan los ids que ya no existen.
+ * El clic se escucha en document, no en cada botón: así funcionan los botones que el JS crea después.
  */
 (function iniciarFavoritos() {
-  const { TechPulse } = window;
+  const { NewsWave } = window;
 
+  /** Ids numéricos, sin duplicados y sin valores que no sean números. */
   function obtenerIds() {
     return [...new Set(
-      TechPulse.leerLista(TechPulse.CLAVES.favoritos)
+      NewsWave.leerLista(NewsWave.CLAVES.favoritos)
         .map(Number)
         .filter((id) => Number.isFinite(id))
     )];
   }
 
+  /**
+   * Recorre los botones [data-favorito] que haya dentro de raiz
+   * y les pone la clase is-active si su id está guardado.
+   * raiz puede ser toda la página o solo un bloque recién pintado.
+   */
   function pintarFavoritos(raiz = document) {
     const ids = new Set(obtenerIds());
     raiz.querySelectorAll('[data-favorito]').forEach((boton) => {
@@ -26,18 +34,23 @@
     });
   }
 
+  /**
+   * Solo corre en favoritos.html, donde existe #lista-favoritos.
+   * Cruza los ids guardados con el catálogo actual.
+   * Si algún id ya no tiene noticia, se borra de localStorage y no se muestra.
+   */
   async function renderizarPagina() {
     const contenedor = document.getElementById('lista-favoritos');
     if (!contenedor) return;
 
     try {
-      const catalogo = await TechPulse.cargarCatalogo();
+      const catalogo = await NewsWave.cargarCatalogo();
       const ids = obtenerIds();
       const vigentes = catalogo.filter((noticia) => ids.includes(Number(noticia.id)));
       const idsVigentes = vigentes.map((noticia) => Number(noticia.id));
 
       if (idsVigentes.length !== ids.length) {
-        TechPulse.guardarLista(TechPulse.CLAVES.favoritos, idsVigentes);
+        NewsWave.guardarLista(NewsWave.CLAVES.favoritos, idsVigentes);
       }
 
       if (!vigentes.length) {
@@ -50,14 +63,15 @@
         return;
       }
 
-      contenedor.innerHTML = `<div class="card-grid">${vigentes.map((noticia) => TechPulse.crearTarjeta(noticia, 2)).join('')}</div>`;
+      contenedor.innerHTML = `<div class="card-grid">${vigentes.map((noticia) => NewsWave.crearTarjeta(noticia, 2)).join('')}</div>`;
       pintarFavoritos(contenedor);
     } catch (error) {
       console.error(error);
-      contenedor.innerHTML = TechPulse.htmlErrorCarga();
+      contenedor.innerHTML = NewsWave.htmlErrorCarga();
     }
   }
 
+  // Un solo listener para todos los botones de favorito, incluso los que se crean más tarde.
   document.addEventListener('click', (evento) => {
     const boton = evento.target.closest('[data-favorito]');
     if (!boton) return;
@@ -70,18 +84,19 @@
     if (activo) ids.add(id);
     else ids.delete(id);
 
-    const guardado = TechPulse.guardarLista(TechPulse.CLAVES.favoritos, [...ids]);
+    const guardado = NewsWave.guardarLista(NewsWave.CLAVES.favoritos, [...ids]);
     if (!guardado) {
-      TechPulse.anunciar('No se pudo guardar el favorito en este navegador.');
+      NewsWave.anunciar('No se pudo guardar el favorito en este navegador.');
       return;
     }
 
     pintarFavoritos();
-    TechPulse.anunciar(activo ? 'Noticia guardada en favoritos.' : 'Noticia quitada de favoritos.');
+    NewsWave.anunciar(activo ? 'Noticia guardada en favoritos.' : 'Noticia quitada de favoritos.');
     if (document.body.dataset.page === 'favoritos') renderizarPagina();
   });
 
-  TechPulse.pintarFavoritos = pintarFavoritos;
+  // noticias.js y detalle.js llaman esto después de pintar HTML nuevo.
+  NewsWave.pintarFavoritos = pintarFavoritos;
 
   document.addEventListener('DOMContentLoaded', () => {
     pintarFavoritos();

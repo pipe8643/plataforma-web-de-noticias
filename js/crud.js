@@ -1,11 +1,16 @@
 /**
- * Administración.
- * La interfaz crea y elimina noticias. app.js decide cómo persistirlas
- * en localStorage sin modificar data/noticias.json.
+ * crud.js — pantalla de Administración.
+ *
+ * Esta página no guarda en el JSON. Llama a las funciones de app.js,
+ * y esas funciones escriben en localStorage. Por eso crear o eliminar
+ * solo se ve en este navegador.
+ *
+ * CRUD aquí es: ver el listado, crear y eliminar. No hay edición de una noticia existente.
  */
 (function iniciarCrud() {
-  const { TechPulse } = window;
+  const { NewsWave } = window;
 
+  /** Lee el value de un <select>. Si el select no existe, devuelve cadena vacía. */
   function valorSeleccionado(select) {
     return select ? select.value : '';
   }
@@ -26,15 +31,17 @@
       destacada: formulario.querySelector('#destacada')
     };
 
+    /** Cambia la miniatura de abajo del formulario según la imagen elegida. */
     function actualizarPreview() {
       if (!preview) return;
-      const ruta = TechPulse.imagenSegura(valorSeleccionado(campos.imagen), valorSeleccionado(campos.categoria));
+      const ruta = NewsWave.imagenSegura(valorSeleccionado(campos.imagen), valorSeleccionado(campos.categoria));
       preview.src = ruta;
-      preview.alt = `Vista previa de la ilustración seleccionada`;
+      preview.alt = 'Vista previa de la ilustración seleccionada';
     }
 
+    // Al cambiar la categoría, se selecciona sola la ilustración que le corresponde.
     campos.categoria.addEventListener('change', () => {
-      const sugerida = TechPulse.imagenPorCategoria(campos.categoria.value);
+      const sugerida = NewsWave.imagenPorCategoria(campos.categoria.value);
       if ([...campos.imagen.options].some((opcion) => opcion.value === sugerida)) {
         campos.imagen.value = sugerida;
       }
@@ -43,6 +50,7 @@
     campos.imagen.addEventListener('change', actualizarPreview);
     actualizarPreview();
 
+    /** Banner verde o rojo encima del formulario. esError cambia la clase banner-error. */
     function mostrarAviso(texto, esError = false) {
       aviso.hidden = false;
       aviso.textContent = texto;
@@ -51,8 +59,13 @@
       aviso.focus();
     }
 
+    /**
+     * Vuelve a pintar la lista de la derecha.
+     * Cada fila dice si la noticia viene del JSON ("Catálogo base")
+     * o si se creó en este navegador ("Creada en este navegador").
+     */
     async function renderizar() {
-      const noticias = await TechPulse.cargarCatalogo();
+      const noticias = await NewsWave.cargarCatalogo();
       const conteo = document.getElementById('conteo-admin');
       if (conteo) {
         conteo.textContent = noticias.length === 1
@@ -61,19 +74,19 @@
       }
 
       if (!noticias.length) {
-        listado.innerHTML = TechPulse.mensajeEstado('El catálogo local está vacío. Puedes crear una noticia o restablecer la semilla.');
+        listado.innerHTML = NewsWave.mensajeEstado('El catálogo local está vacío. Puedes crear una noticia o restablecer la semilla.');
         return;
       }
 
       listado.innerHTML = noticias.map((noticia) => {
-        const imagen = TechPulse.escaparHtml(TechPulse.imagenSegura(noticia.imagen, noticia.categoria));
+        const imagen = NewsWave.escaparHtml(NewsWave.imagenSegura(noticia.imagen, noticia.categoria));
         const origen = noticia.origen === 'local' ? 'Creada en este navegador' : 'Catálogo base';
         return `
           <article class="admin-item">
             <img src="${imagen}" alt="" width="1200" height="675">
             <div>
-              <h3>${TechPulse.escaparHtml(noticia.titulo)}</h3>
-              <p>${TechPulse.escaparHtml(noticia.categoria)} · <time datetime="${TechPulse.escaparHtml(noticia.fecha)}">${TechPulse.escaparHtml(TechPulse.formatearFecha(noticia.fecha))}</time></p>
+              <h3>${NewsWave.escaparHtml(noticia.titulo)}</h3>
+              <p>${NewsWave.escaparHtml(noticia.categoria)} · <time datetime="${NewsWave.escaparHtml(noticia.fecha)}">${NewsWave.escaparHtml(NewsWave.formatearFecha(noticia.fecha))}</time></p>
               <span class="origen">${origen}</span>
             </div>
             <button type="button" class="btn btn-danger" data-eliminar="${Number(noticia.id)}">Eliminar</button>
@@ -83,7 +96,7 @@
 
     formulario.addEventListener('submit', async (evento) => {
       evento.preventDefault();
-      const resultado = TechPulse.crearNoticia({
+      const resultado = NewsWave.crearNoticia({
         titulo: campos.titulo.value,
         descripcion: campos.descripcion.value,
         contenido: campos.contenido.value,
@@ -92,9 +105,10 @@
         destacada: campos.destacada.checked
       });
 
+      // destacada e imagen no tienen mensaje de error propio; el resto sí.
       Object.entries(campos).forEach(([clave, input]) => {
         if (clave === 'destacada' || clave === 'imagen') return;
-        TechPulse.mostrarErrorCampo(input, resultado.ok ? '' : (resultado.errores[clave] || ''));
+        NewsWave.mostrarErrorCampo(input, resultado.ok ? '' : (resultado.errores[clave] || ''));
       });
 
       if (!resultado.ok) {
@@ -108,10 +122,11 @@
       campos.imagen.selectedIndex = 0;
       actualizarPreview();
       mostrarAviso(`Noticia creada: «${resultado.noticia.titulo}». Solo se ve en este navegador.`);
-      TechPulse.anunciar(aviso.textContent);
+      NewsWave.anunciar(aviso.textContent);
       await renderizar();
     });
 
+    // El clic se escucha en la lista, no en cada botón, porque los botones se rehacen en cada renderizar().
     listado.addEventListener('click', async (evento) => {
       const boton = evento.target.closest('[data-eliminar]');
       if (!boton) return;
@@ -120,32 +135,32 @@
       const confirmar = window.confirm(`¿Eliminar «${titulo}» de este navegador? Si estaba en favoritos, también se quitará de esa lista.`);
       if (!confirmar) return;
 
-      const hecho = TechPulse.eliminarNoticia(id);
+      const hecho = NewsWave.eliminarNoticia(id);
       if (!hecho) {
         mostrarAviso('No se pudo eliminar la noticia en este navegador.', true);
         return;
       }
       mostrarAviso('La noticia se ocultó en este navegador. El archivo JSON no cambió.');
-      TechPulse.anunciar(aviso.textContent);
+      NewsWave.anunciar(aviso.textContent);
       await renderizar();
     });
 
     document.getElementById('restablecer-catalogo')?.addEventListener('click', async () => {
       const confirmar = window.confirm('¿Restablecer el catálogo de este navegador? Volverán las noticias del JSON y se perderán las creadas o eliminadas aquí. Los favoritos de las noticias base se conservan.');
       if (!confirmar) return;
-      const hecho = TechPulse.restablecerCatalogo();
+      const hecho = NewsWave.restablecerCatalogo();
       if (!hecho) {
         mostrarAviso('No se pudo restablecer el catálogo.', true);
         return;
       }
       mostrarAviso('Catálogo restablecido a partir de data/noticias.json.');
-      TechPulse.anunciar(aviso.textContent);
+      NewsWave.anunciar(aviso.textContent);
       await renderizar();
     });
 
     renderizar().catch((error) => {
       console.error(error);
-      listado.innerHTML = TechPulse.htmlErrorCarga();
+      listado.innerHTML = NewsWave.htmlErrorCarga();
     });
   });
 })();

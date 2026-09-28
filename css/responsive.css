@@ -1,3 +1,11 @@
+/*
+  responsive.css — la misma página en pantallas más angostas.
+  1100px: las rejillas pasan de varias columnas a dos.
+  980px: aparece el menú hamburguesa y se ocultan el buscador y el icono de la cabecera.
+  640px: todo queda en una sola columna.
+  El JS cierra el menú si la ventana vuelve a pasar de 980px.
+*/
+
 @media (max-width: 1100px) {
   .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cat-grid, .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

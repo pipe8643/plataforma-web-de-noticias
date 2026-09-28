@@ -1,60 +1,82 @@
 /**
- * Portada, destacadas y listado.
- * Las cards salen del catálogo (JSON + cambios locales), no del HTML.
+ * noticias.js — portada, destacadas y listado.
+ *
+ * El HTML de inicio y de noticias.html deja cajas vacías.
+ * Este archivo pide el catálogo a NewsWave.cargarCatalogo() y escribe las tarjetas ahí.
+ * No crea datos: solo decide cuáles noticias mostrar y en qué contenedor.
  */
 (function iniciarNoticias() {
-  const { TechPulse } = window;
+  const { NewsWave } = window;
 
+  /**
+   * Pinta un grupo de noticias dentro de un contenedor.
+   * Si la lista llega vacía, muestra el mensaje que recibió (por ejemplo "No hay destacadas").
+   * nivel es 2 o 3 y se lo pasa a crearTarjeta para elegir h2 o h3.
+   * Después pide a favoritos.js que marque los corazones que ya estaban guardados.
+   */
   function pintar(noticias, contenedor, nivel, mensajeVacio) {
     if (!noticias.length) {
-      contenedor.innerHTML = TechPulse.mensajeEstado(mensajeVacio);
+      contenedor.innerHTML = NewsWave.mensajeEstado(mensajeVacio);
       return;
     }
-    contenedor.innerHTML = noticias.map((noticia) => TechPulse.crearTarjeta(noticia, nivel)).join('');
-    if (typeof TechPulse.pintarFavoritos === 'function') TechPulse.pintarFavoritos(contenedor);
+    contenedor.innerHTML = noticias.map((noticia) => NewsWave.crearTarjeta(noticia, nivel)).join('');
+    if (typeof NewsWave.pintarFavoritos === 'function') NewsWave.pintarFavoritos(contenedor);
   }
 
+  /**
+   * Elige hasta 4 noticias para el hero y la sección destacada.
+   * Primero van las que tienen destacada: true. Si no llegan a 4, se completan con el resto.
+   * El catálogo ya viene ordenado por fecha, así que "el resto" son las más recientes.
+   */
   function seleccionDestacadas(noticias) {
     const marcadas = noticias.filter((noticia) => noticia.destacada === true);
     const resto = noticias.filter((noticia) => !marcadas.includes(noticia));
     return [...marcadas, ...resto].slice(0, 4);
   }
 
+  /** Texto de ?q= en minúsculas. Vacío si el usuario no buscó nada. */
   function textoBusqueda() {
     return (new URLSearchParams(window.location.search).get('q') || '').trim().toLowerCase();
   }
 
+  /** Categoría pedida en la URL, por ejemplo noticias.html?categoria=Hardware. Si no hay, "todas". */
   function categoriaInicial() {
     return new URLSearchParams(window.location.search).get('categoria') || 'todas';
   }
 
+  /** true si el título, la descripción o la categoría contienen el texto buscado. */
   function coincideBusqueda(noticia, texto) {
     if (!texto) return true;
     const bolsa = `${noticia.titulo} ${noticia.descripcion} ${noticia.categoria}`.toLowerCase();
     return bolsa.includes(texto);
   }
 
+  /**
+   * Carrusel de la portada. Solo corre si existe #hero-slider (está en index.html).
+   * Genera una diapositiva por noticia destacada, flechas y puntos.
+   * mostrar() activa una diapositiva y oculta las demás con el atributo hidden.
+   */
   function prepararHero(noticias) {
     const raiz = document.getElementById('hero-slider');
     if (!raiz) return;
     const slides = seleccionDestacadas(noticias);
     if (!slides.length) {
-      raiz.innerHTML = TechPulse.mensajeEstado('No hay noticias para la portada.');
+      raiz.innerHTML = NewsWave.mensajeEstado('No hay noticias para la portada.');
       return;
     }
 
     raiz.innerHTML = `
       <div class="hero-viewport">
         ${slides.map((noticia, indice) => {
-          const imagen = TechPulse.escaparHtml(TechPulse.imagenSegura(noticia.imagen, noticia.categoria));
-          const respaldo = TechPulse.escaparHtml(TechPulse.imagenPorCategoria(noticia.categoria));
+          const imagen = NewsWave.escaparHtml(NewsWave.imagenSegura(noticia.imagen, noticia.categoria));
+          const respaldo = NewsWave.escaparHtml(NewsWave.imagenPorCategoria(noticia.categoria));
           return `
             <article class="hero-slide${indice === 0 ? ' is-active' : ''}" data-slide="${indice}" ${indice === 0 ? '' : 'hidden'}>
               <img src="${imagen}" alt="" data-fallback="${respaldo}">
               <div class="hero-slide-copy">
-                <span class="badge badge-${TechPulse.slugCategoria(noticia.categoria)}">${TechPulse.escaparHtml(noticia.categoria)}</span>
-                <h1>${TechPulse.escaparHtml(noticia.titulo)}</h1>
-                <p>${TechPulse.escaparHtml(noticia.descripcion)}</p>
+                <span class="badge badge-${NewsWave.slugCategoria(noticia.categoria)}">${NewsWave.escaparHtml(noticia.categoria)}</span>
+                <h1>${NewsWave.escaparHtml(noticia.titulo)}</h1>
+                <p>${NewsWave.escaparHtml(noticia.descripcion)}</p>
                 <a class="btn btn-primary" href="detalle.html?id=${Number(noticia.id)}">Ver más <span aria-hidden="true">→</span></a>
               </div>
             </article>`;
@@ -70,6 +92,7 @@
     const puntos = [...raiz.querySelectorAll('.hero-dot')];
     let actual = 0;
 
+    // El módulo (%) hace que al pasar de la última se vuelva a la primera, y al revés.
     function mostrar(indice) {
       actual = (indice + piezas.length) % piezas.length;
       piezas.forEach((pieza, posicion) => {
@@ -91,6 +114,11 @@
     });
   }
 
+  /**
+   * Filtros del listado (noticias.html).
+   * Crea un botón por categoría a partir de las noticias reales, no de una lista fija.
+   * Al hacer clic, aplica() deja solo las que coinciden con la categoría y con la búsqueda.
+   */
   function prepararFiltros(noticias) {
     const barra = document.getElementById('filtros-categoria');
     const listado = document.getElementById('listado-noticias');
@@ -105,7 +133,7 @@
     barra.innerHTML = ['Todas', ...categorias].map((categoria) => {
       const valor = categoria === 'Todas' ? 'todas' : categoria;
       const activo = valor === categoriaActiva;
-      return `<button type="button" class="chip${activo ? ' is-active' : ''}" data-categoria="${TechPulse.escaparHtml(valor)}" aria-pressed="${activo ? 'true' : 'false'}">${TechPulse.escaparHtml(categoria)}</button>`;
+      return `<button type="button" class="chip${activo ? ' is-active' : ''}" data-categoria="${NewsWave.escaparHtml(valor)}" aria-pressed="${activo ? 'true' : 'false'}">${NewsWave.escaparHtml(categoria)}</button>`;
     }).join('');
 
     function aplicar(categoria) {
@@ -137,6 +165,11 @@
     aplicar(categoriaActiva);
   }
 
+  /**
+   * Al cargar el DOM, mira qué cajas existen en esta página y llena solo esas.
+   * index.html tiene hero, destacadas y últimas. noticias.html tiene el listado.
+   * Si fetch falla, las tres cajas muestran el mismo mensaje de error.
+   */
   document.addEventListener('DOMContentLoaded', async () => {
     const destacadas = document.getElementById('destacadas');
     const listado = document.getElementById('listado-noticias');
@@ -144,7 +177,7 @@
     if (!destacadas && !listado && !hero) return;
 
     try {
-      const noticias = await TechPulse.cargarCatalogo();
+      const noticias = await NewsWave.cargarCatalogo();
       if (hero) prepararHero(noticias);
       if (destacadas) {
         pintar(
@@ -167,7 +200,7 @@
       if (listado) prepararFiltros(noticias);
     } catch (error) {
       console.error(error);
-      const html = TechPulse.htmlErrorCarga();
+      const html = NewsWave.htmlErrorCarga();
       if (hero) hero.innerHTML = html;
       if (destacadas) destacadas.innerHTML = html;
       if (listado) listado.innerHTML = html;

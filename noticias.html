@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!-- Listado. noticias.js crea los filtros y las tarjetas dentro de #listado-noticias. -->
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Listado de noticias tecnológicas de TechPulse, generado desde un archivo JSON local.">
+  <meta name="description" content="Listado de noticias tecnológicas de NewsWave, generado desde un archivo JSON local.">
   <meta name="theme-color" content="#0c2344">
-  <title>TechPulse | Noticias</title>
+  <title>NewsWave | Noticias</title>
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,15 +14,18 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+<!-- data-page le dice a app.js qué enlace del menú marcar. En el detalle se marca Noticias. -->
 <body data-page="noticias">
+  <!-- Enlace para teclado: aparece al tabular y salta el menú. -->
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <!-- Cabecera compartida. app.js abre el menú en pantallas angostas y rellena el buscador si la URL trae ?q=. -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html">
         <span class="logo-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-14h-7V2z"/></svg>
         </span>
-        <span>TechPulse</span>
+        <span>NewsWave</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
         <span class="sr-only">Abrir menú</span>
@@ -58,9 +62,10 @@
     </div>
   </header>
 
+  <!-- Zona principal. Los bloques con id (hero, listado, detalle, favoritos, formularios) los rellena el JS. -->
   <main id="contenido">
     <noscript>
-      <p class="estado estado-error noscript">TechPulse necesita JavaScript para cargar las noticias, los favoritos y el formulario.</p>
+      <p class="estado estado-error noscript">NewsWave necesita JavaScript para cargar las noticias, los favoritos y el formulario.</p>
     </noscript>
 
     <header class="page-intro">
@@ -73,6 +78,7 @@
 
     <section class="section" aria-labelledby="titulo-pagina">
       <div class="container">
+        <!-- noticias.js escribe un botón por categoría y las tarjetas del catálogo. -->
         <div id="filtros-categoria" class="filters" role="group" aria-label="Filtrar por categoría"></div>
         <p id="resumen-listado" class="resumen-listado" aria-live="polite"></p>
         <div id="listado-noticias" class="card-grid">
@@ -82,6 +88,7 @@
     </section>
   </main>
 
+  <!-- Pie compartido. El año de #anio lo escribe app.js al cargar la página. -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand-block">
@@ -89,7 +96,7 @@
           <span class="logo-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-14h-7V2z"/></svg>
           </span>
-          <span>TechPulse</span>
+          <span>NewsWave</span>
         </a>
         <p>Tu fuente confiable de noticias tecnológicas, innovación y tendencias digitales.</p>
         <div class="social" aria-hidden="true"><span>f</span><span>X</span><span>in</span><span>▶</span></div>
@@ -119,16 +126,17 @@
         <h2>Contacto</h2>
         <ul>
           <li>Bogotá, Colombia</li>
-          <li><a href="mailto:contacto@techpulse.com">contacto@techpulse.com</a></li>
+          <li><a href="mailto:contacto@newswave.com">contacto@newswave.com</a></li>
           <li><a href="tel:+573001234567">+57 300 123 4567</a></li>
         </ul>
       </div>
     </div>
     <div class="container footer-copy">
-      <p>© <span id="anio">2026</span> TechPulse.</p>
+      <p>© <span id="anio">2026</span> NewsWave.</p>
     </div>
   </footer>
 
+  <!-- defer espera a que el HTML esté listo. app.js siempre va primero porque crea window.NewsWave. -->
   <script src="js/app.js" defer></script>
   <script src="js/favoritos.js" defer></script>
   <script src="js/noticias.js" defer></script>
